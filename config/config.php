@@ -31,7 +31,7 @@ try {
         PDO::ATTR_ERRMODE
     );
 
-    echo 'conectado';
+   
 } catch (PDOException $e) {
 
     echo 'Erro ao conectar';

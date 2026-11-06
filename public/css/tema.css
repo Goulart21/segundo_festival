@@ -1,0 +1,40 @@
+
+:root {
+    /* Cores principais */
+    --festival-verde: #214E42;
+    --festival-terracota: #A5523D;
+    --festival-marfim: #FFFEFB;
+
+    /* Textos e contornos */
+    --festival-folhagem: #243B33;
+    --festival-salvia-clara: #D5DAD2;
+
+    /* Estados */
+    --festival-sucesso: #286044;
+    --festival-nevoa: #E8EEE7;
+}
+
+
+body {
+    margin: 0;
+    background-color: var(--festival-linho);
+    color: var(--festival-folhagem);
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    background-color: var(--festival-marfim);
+    border-color: var(--festival-salvia-clara);
+}
+
+.btn-festival {
+    background-color: var(--festival-verde);
+    border: 1px solid var(--festival-verde);
+    color: var(--festival-marfim);
+}
+
+.btn-festival:hover {
+    background-color: var(--festival-folhagem);
+    border-color: var(--festival-folhagem);
+    color: var(--festival-marfim);
+}
