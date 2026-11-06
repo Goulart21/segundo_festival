@@ -18,7 +18,7 @@ class ParticipanteController
 
         $resultado = $this->participanteService->cadastrarParticipante($participante);
 
-        header('Location: application/json; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8;');
 
         if ($resultado === 'CADASTRADO') {
             http_response_code(201);
@@ -47,7 +47,7 @@ class ParticipanteController
 
         $resultado = $this->participanteService->listarParticipantes();
 
-        header('Location: application/json; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8');
 
         if ($resultado === null) {
 
@@ -66,7 +66,7 @@ class ParticipanteController
 
         $resultado = $this->participanteService->buscarParticipantePorId($id);
 
-        header('Location: application/json; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8');
 
 
         if ($resultado === null) {
@@ -86,7 +86,7 @@ class ParticipanteController
 
         $resultado = $this->participanteService->atualizarParticipante($id, $participante);
 
-        header('Location: application/json; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8');
 
         if ($resultado === 'ATUALIZADO') {
 

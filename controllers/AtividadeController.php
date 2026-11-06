@@ -4,7 +4,7 @@
 
 require_once __DIR__ . '/../services/AtividadeService.php';
 
-class ParticipanteController
+class AtividadeController
 {
 
     private AtividadeService $atividadeService;
@@ -19,7 +19,7 @@ class ParticipanteController
 
         $resultado = $this->atividadeService->cadastarAtividade($atividade);
 
-        header('Location: application/json; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8');
 
         if ($resultado === 'CADASTRADO') {
             http_response_code(201);
@@ -48,7 +48,7 @@ class ParticipanteController
 
         $resultado = $this->atividadeService->listarAtividades();
 
-        header('Location: application/json; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8');
 
         if ($resultado === null) {
 
@@ -67,7 +67,7 @@ class ParticipanteController
 
         $resultado = $this->atividadeService->buscarAtividadePorId($id);
 
-        header('Location: application/json; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8');
 
 
         if ($resultado === null) {
@@ -88,7 +88,7 @@ class ParticipanteController
 
         $resultado = $this->atividadeService->atualizarAtividade($id, $atividade);
 
-        header('Location: application/json; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8');
 
         if ($resultado === 'ATUALIZADO') {
 
@@ -130,7 +130,7 @@ class ParticipanteController
 
         $resultado = $this->atividadeService->excluirAtividade($id);
 
-        header('Location: application/json; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8');
 
         if ($resultado === 'EXCLUIDO') {
 

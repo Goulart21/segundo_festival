@@ -2,7 +2,7 @@
 <?php
 
 require_once __DIR__  . '/../config/config.php';
-
+require_once __DIR__ . '/../models/Participante.php';
 class ParticipanteService
 {
 
@@ -84,7 +84,7 @@ class ParticipanteService
             return 'NAO_ENCONTRADO';
         }
 
-        $sql = "SELECT COUNT(*) participantes WHERE email = :email AND id_participante <> :id";
+        $sql = "SELECT COUNT(*) FROM participantes WHERE email = :email AND id_participante <> :id";
 
         $stmt = $this->pdo->prepare($sql);
 
@@ -107,7 +107,7 @@ class ParticipanteService
             ':telefone' => $participante->getTelefone(),
             ':id' => $id
         ])) {
-            return 'CADASTRADO';
+            return 'ATUALIZADO';
         }
 
         return 'ERRO_CADASTRO';

@@ -140,6 +140,10 @@ class InscricaoService
 
         $stmt = $this->pdo->prepare($sql);
 
+        $stmt->execute([
+            ':id' => $id
+        ]);
+
         $inscricaoId = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $inscricaoId ?: null;

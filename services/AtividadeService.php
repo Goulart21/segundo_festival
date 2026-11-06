@@ -1,6 +1,9 @@
 
 <?php
 
+
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../models/Atividade.php' ;
 class AtividadeService
 {
 
@@ -103,7 +106,7 @@ class AtividadeService
                 return 'CAPACIDADE_MENOR_QUE_INSCRITOS';
             }
 
-            $sql = "UPDATE atividades SET nome_atividade = :nome_atividade, descricao = :descricao, data_atividade = :data_atividade, hora_inicio = :hora_inicio, hora_fim = :hora_fim
+            $sql = "UPDATE atividades SET nome_atividade = :nome_atividade, descricao = :descricao, data_atividade = :data_atividade, hora_inicio = :hora_inicio, hora_fim = :hora_fim,
             local_atividade = :local_atividade, capacidade = :capacidade WHERE id_atividade = :id";
 
             $stmt = $this->pdo->prepare($sql);
@@ -124,6 +127,58 @@ class AtividadeService
             return 'ERRO_ATUALIZAR';
         } catch (PDOException $e) {
             return 'ERRO_ATUALIZAR';
+        }
+    }
+
+    public function excluirAtividade(int $id_atividade): string
+    {
+        try {
+
+            $sql = "SELECT COUNT(*)
+                FROM atividades
+                WHERE id_atividade = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id_atividade
+            ]);
+
+            if ((int) $stmt->fetchColumn() === 0) {
+                return 'NAO_ENCONTRADO';
+            }
+
+
+            $sql = "SELECT COUNT(*)
+                FROM inscricoes
+                WHERE id_atividade = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id_atividade
+            ]);
+
+            if ((int) $stmt->fetchColumn() > 0) {
+                return 'POSSUI_INSCRICOES';
+            }
+
+            $sql = "DELETE FROM atividades
+                WHERE id_atividade = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id_atividade
+            ]);
+
+            if ($stmt->rowCount() > 0) {
+                return 'EXCLUIDO';
+            }
+
+            return 'NAO_ENCONTRADO';
+        } catch (PDOException $e) {
+            return 'ERRO_EXCLUIR';
         }
     }
 }
