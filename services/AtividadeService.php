@@ -108,9 +108,20 @@ class AtividadeService
 
             $stmt = $this->pdo->prepare($sql);
 
-            if($stmt->execute([
-                ':nome_atividade':
-            ]))
+            if ($stmt->execute([
+                ':nome_atividade' => $atividade->getNomeAtividade(),
+                ':descricao' => $atividade->getDescricao(),
+                ':data_atividade' => $atividade->getDataAtividade(),
+                ':hora_inicio' => $atividade->getHoraInicio(),
+                ':hora_fim' => $atividade->getHoraFim(),
+                ':local_atividade' => $atividade->getLocalAtividade(),
+                ':capacidade' => $atividade->getCapacidade(),
+                ':id' => $id
+            ])) {
+                return 'ATUALIZADO';
+            }
+
+            return 'ERRO_ATUALIZAR';
         } catch (PDOException $e) {
             return 'ERRO_ATUALIZAR';
         }
